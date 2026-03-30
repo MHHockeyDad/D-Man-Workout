@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Youth Hockey — 12-Week Training Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #c8e8f5;
+    --deep-blue: #0a1628;
+    --mid-blue: #0d2244;
+    --accent: #00b4d8;
+    --gold: #f4b942;
+    --red: #e63946;
+    --white: #f0f4f8;
+    --muted: #7a9ab5;
+    --card-bg: #0f1e35;
+    --border: #1a3050;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--deep-blue);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0a1628 0%, #0d2f55 50%, #091525 100%);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--accent);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: 'HOCKEY';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(255,255,255,0.025);
+    position: absolute;
+    bottom: -30px; right: -20px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -5px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--deep-blue);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 0 20px;
+  }
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .section-title small {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  /* ── PHASE CARDS ── */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .phase-card {
+    background: var(--card-bg);
+    border-top: 3px solid var(--accent);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .phase-card:hover { transform: translateY(-3px); }
+  .phase-card.gold { border-top-color: var(--gold); }
+  .phase-card.red  { border-top-color: var(--red); }
+
+  .phase-card::after {
+    content: attr(data-phase);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    position: absolute;
+    bottom: -10px; right: 10px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .phase-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .phase-card.gold .phase-label { color: var(--gold); }
+  .phase-card.red  .phase-label { color: var(--red); }
+
+  .phase-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .phase-weeks {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .phase-focus {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.7;
+    opacity: 0.85;
+  }
+
+  /* ── WEEKLY SCHEDULE ── */
+  .week-block {
+    background: var(--card-bg);
+    border-left: 3px solid var(--border);
+    margin-bottom: 3px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .week-block:hover { border-left-color: var(--accent); }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .week-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--accent);
+    min-width: 80px;
+    line-height: 1;
+  }
+  .week-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    flex: 1;
+  }
+  .week-phase-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .toggle-icon {
+    font-size: 20px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    margin-left: auto;
+  }
+  .week-block.open .toggle-icon { transform: rotate(45deg); }
+
+  .week-body {
+    display: none;
+    padding: 0 24px 24px;
+  }
+  .week-block.open .week-body { display: block; }
+
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .day-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+  .day-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-name.rest { color: var(--muted); }
+  .day-name.active-rec { color: #56d4a0; }
+
+  ul.drills {
+    list-style: none;
+    padding: 0;
+  }
+  ul.drills li {
+    font-size: 13px;
+    color: rgba(240,244,248,0.8);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  ul.drills li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  ul.drills li strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── DRILL LIBRARY ── */
+  .drill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 10px;
+  }
+
+  .drill-card {
+    background: var(--card-bg);
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .drill-cat {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .drill-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .drill-desc {
+    font-size: 13px;
+    color: rgba(240,244,248,0.7);
+    line-height: 1.65;
+  }
+
+  /* ── SAFETY / NOTES ── */
+  .callout {
+    background: rgba(244,185,66,0.08);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .callout.blue {
+    background: rgba(0,180,216,0.06);
+    border-left-color: var(--accent);
+  }
+  .callout-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--gold);
+  }
+  .callout.blue .callout-title { color: var(--accent); }
+  .callout p, .callout li {
+    font-size: 13.5px;
+    color: rgba(240,244,248,0.8);
+    line-height: 1.7;
+  }
+  .callout ul { list-style: disc; padding-left: 18px; margin-top: 6px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060e1a;
+    border-top: 1px solid var(--border);
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 60px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 40px 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 40px; }
+    h1 { font-size: 52px; }
+    .day-grid { grid-template-columns: 1fr; }
+    .week-header { flex-wrap: wrap; }
+    .week-num { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="badge">Elite Youth Development Program</div>
+    <h1>12-WEEK<br><span>HOCKEY</span><br>TRAINING</h1>
+    <div class="hero-sub">Speed · Agility · Strength · Endurance</div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">12</span><span class="stat-label">Weeks</span></div>
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Days / Week</span></div>
+      <div class="stat"><span class="stat-num">11</span><span class="stat-label">Turning 12</span></div>
+      <div class="stat"><span class="stat-num">RW</span><span class="stat-label">Position</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SAFETY NOTE -->
+  <div class="callout" style="margin-top:32px;">
+    <div class="callout-title">⚠ Youth Athlete Safety Guidelines</div>
+    <ul>
+      <li>All strength work uses <strong>light loads</strong> — technique and range of motion always come first. Form over weight, every time.</li>
+      <li>Never skip warm-up or cool-down. Growing bodies need proper prep and recovery.</li>
+      <li>Rest days are training days. Sleep 9–10 hours. Hydrate continuously.</li>
+      <li>If anything hurts (not just "burns") — STOP. Pain is a signal, not a challenge.</li>
+      <li>Adjust weights based on feel: if form breaks down, drop the weight immediately.</li>
+      <li>Always have an adult present for free weight exercises.</li>
+    </ul>
+  </div>
+
+  <!-- PHASES OVERVIEW -->
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title"><small>Program Structure</small>THREE-PHASE PROGRESSION</div>
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-card" data-phase="I">
+      <div class="phase-label">Phase I — Weeks 1–4</div>
+      <div class="phase-title">Foundation & Motor Patterns</div>
+      <div class="phase-weeks">WEEKS 1 – 4</div>
+      <div class="phase-focus">Build movement vocabulary. A-skips, B-skips, carioca, ladder fundamentals, hip flexor activation, body weight strength. Learn how to accelerate and decelerate correctly on blades.</div>
+    </div>
+    <div class="phase-card gold" data-phase="II">
+      <div class="phase-label" style="color:var(--gold)">Phase II — Weeks 5–8</div>
+      <div class="phase-title">Speed & Power Development</div>
+      <div class="phase-weeks">WEEKS 5 – 8</div>
+      <div class="phase-focus">Increase intensity and complexity. Introduce light dumbbell work, explosive starts, lateral quickness, extended roller blade sessions, and first-step acceleration patterns.</div>
+    </div>
+    <div class="phase-card red" data-phase="III">
+      <div class="phase-label" style="color:var(--red)">Phase III — Weeks 9–12</div>
+      <div class="phase-title">Competition Prep & Peak</div>
+      <div class="phase-weeks">WEEKS 9 – 12</div>
+      <div class="phase-focus">Peak speed, max agility complexity, progressive strength loads, longer endurance intervals, and game-speed pattern work. Sharpen everything built in Phases I and II.</div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT NOTE -->
+  <div class="callout blue" style="margin-top:16px;">
+    <div class="callout-title">Equipment Used in This Program</div>
+    <p>Cones · Agility Ladder · Dumbbells (light — 5 lb, 8 lb, 10 lb max) · Free Weights / Barbell (bodyweight to 15 lb bar only) · Roller Blades · Bike</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WEEKLY SCHEDULE -->
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title"><small>Full Program</small>WEEK-BY-WEEK BREAKDOWN</div>
+  </div>
+
+  <!-- ═══ PHASE I ═══ -->
+
+  <!-- WEEK 1 -->
+  <div class="week-block" id="w1">
+    <div class="week-header" onclick="toggle('w1')">
+      <div class="week-num">WK 01</div>
+      <div>
+        <div class="week-title">Movement Foundation</div>
+        <div class="week-phase-tag">Phase I · Foundation</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Low intensity. Learning movement patterns. Everything is technique-first this week.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Sprint / Skip Mechanics</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> 5 min easy jog + dynamic leg swings, hip circles, ankle rolls</li>
+            <li><strong>A-Skips:</strong> 3 × 22 yds — high knee march, drive ball of foot down</li>
+            <li><strong>B-Skips:</strong> 3 × 22 yds — A-skip + extend leg out before strike</li>
+            <li><strong>High Knees:</strong> 3 × 22 yds — fast cadence, arms pumping</li>
+            <li><strong>Butt Kicks:</strong> 3 × 22 yds</li>
+            <li><strong>Carioca:</strong> 3 × 22 yds each direction</li>
+            <li><strong>Single-Leg Hop (intro):</strong> 3 × 4 hops each leg — land on same foot, pause 1s, focus on balance</li>
+            <li><strong>Cool-down:</strong> Hip flexor stretch 60s each side, quad stretch, hamstring stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Ladder + Core</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> 5 min easy bike ride or jog</li>
+            <li><strong>Ladder — 1-in, 1-out:</strong> 4 × down/back</li>
+            <li><strong>Ladder — 2-in, 2-out:</strong> 4 × down/back</li>
+            <li><strong>Ladder — Icky Shuffle:</strong> 3 × (intro — go slow)</li>
+            <li><strong>Plank:</strong> 3 × 20s</li>
+            <li><strong>Dead Bug:</strong> 3 × 8 reps each side</li>
+            <li><strong>Glute Bridge:</strong> 3 × 12</li>
+            <li><strong>Cool-down:</strong> Child's pose, pigeon stretch 45s each side</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Active Recovery / Blades</div>
+          <ul class="drills">
+            <li><strong>Roller blade:</strong> 20 min easy, flat surface</li>
+            <li>Focus: long smooth strides, not speed</li>
+            <li>Practice stopping on each side × 10</li>
+            <li>Hip flexor + pigeon stretch after</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Body Weight Strength</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> 5 min dynamic — leg swings forward/back + side-to-side × 15 each</li>
+            <li><strong>Hip Flexor March (standing):</strong> 3 × 12 each leg</li>
+            <li><strong>Reverse Lunge:</strong> 3 × 8 each leg — bodyweight only</li>
+            <li><strong>Lateral Lunge:</strong> 3 × 8 each side</li>
+            <li><strong>Wall Sit:</strong> 3 × 20s</li>
+            <li><strong>Push-ups:</strong> 3 × 8 (knee push-ups if needed)</li>
+            <li><strong>Superman Hold:</strong> 3 × 10s hold</li>
+            <li><strong>Cool-down:</strong> Kneeling lunge stretch 60s, IT band stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Cone Agility + Endurance</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> 5 min A-skip + B-skip review</li>
+            <li><strong>5-10-5 Cone Drill:</strong> 5 × (walk through first, then 75%)</li>
+            <li><strong>T-Drill:</strong> 4 × (learn the pattern week 1)</li>
+            <li><strong>Box Drill (4 cones):</strong> 4 × each direction</li>
+            <li><strong>Single-Leg Box Step-Up (8" step):</strong> 3 × 8 each leg — step up, drive opposite knee up, step down controlled</li>
+            <li><strong>Endurance Bike:</strong> 15 min steady (conversational pace)</li>
+            <li><strong>Cool-down:</strong> Full stretch routine — 5 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Full Rest</div>
+          <ul class="drills">
+            <li>Sleep 9–10 hours</li>
+            <li>Stay hydrated — 60+ oz water/day</li>
+            <li>Light walk or casual play only</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block" id="w2">
+    <div class="week-header" onclick="toggle('w2')">
+      <div class="week-num">WK 02</div>
+      <div>
+        <div class="week-title">Pattern Reinforcement</div>
+        <div class="week-phase-tag">Phase I · Foundation</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Same structure as Week 1 but increase reps/duration by 10–15%. Add C-skips and intro to dumbbell work.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Skip Progression</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> Dynamic mobility — 6 min</li>
+            <li><strong>A-Skips:</strong> 4 × 22 yds — increase height</li>
+            <li><strong>B-Skips:</strong> 4 × 22 yds</li>
+            <li><strong>C-Skips (lateral):</strong> 3 × 22 yds — lateral skip with hip drive</li>
+            <li><strong>Power Skips:</strong> 3 × 22 yds — max height single-leg bounds</li>
+            <li><strong>Carioca:</strong> 4 × 22 yds each way</li>
+            <li><strong>Single-Leg Hop → Stick:</strong> 3 × 5 each leg — hop forward, land and hold 2s, no wobble</li>
+            <li><strong>Cool-down:</strong> Hip flexor + groin stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Ladder + Light Dumbbell Intro</div>
+          <ul class="drills">
+            <li><strong>Ladder:</strong> 1-in/1-out, 2-in/2-out, Icky Shuffle × 4 each</li>
+            <li><strong>Lateral In/Out (new):</strong> 4 × down/back</li>
+            <li><strong>DB Goblet Squat (5 lb):</strong> 3 × 10 — heels down, chest up</li>
+            <li><strong>DB Romanian Deadlift (5 lb):</strong> 3 × 10 — hinge at hips, soft knees</li>
+            <li><strong>Plank:</strong> 3 × 25s</li>
+            <li><strong>Glute Bridge:</strong> 3 × 15</li>
+            <li><strong>Cool-down stretch</strong></li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Roller Blade</div>
+          <ul class="drills">
+            <li><strong>Blades:</strong> 25 min — mix easy cruise + 5 × short accelerations</li>
+            <li>Practice crossover stepping (key hockey skill)</li>
+            <li>Knee drive while striding</li>
+            <li>Stretch after: calves, hip flexors</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor Priority + Strength</div>
+          <ul class="drills">
+            <li><strong>Banded Hip Flexor March (or unresisted):</strong> 4 × 12</li>
+            <li><strong>Kneeling Hip Flexor Stretch:</strong> 3 × 60s each side</li>
+            <li><strong>Psoas activation — Supine knee drive:</strong> 3 × 10</li>
+            <li><strong>Reverse Lunge:</strong> 3 × 10 each leg</li>
+            <li><strong>Single-Leg Glute Bridge:</strong> 3 × 10 each</li>
+            <li><strong>Push-ups:</strong> 3 × 10</li>
+            <li><strong>Dumbbell Row (5 lb):</strong> 3 × 10 each arm</li>
+            <li><strong>Cool-down</strong></li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Cone Drills + Bike Endurance</div>
+          <ul class="drills">
+            <li><strong>5-10-5 Drill:</strong> 6 × at 85% effort</li>
+            <li><strong>T-Drill:</strong> 5 × — start to increase speed</li>
+            <li><strong>L-Drill:</strong> 4 × each direction (new)</li>
+            <li><strong>Suicide Runs (3 cone):</strong> 4 × </li>
+            <li><strong>Bike Endurance:</strong> 20 min steady state</li>
+            <li><strong>Cool-down</strong></li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Full Rest</div>
+          <ul class="drills">
+            <li>Recovery nutrition: protein + carbs within 30 min post-session</li>
+            <li>Light foam rolling if available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-block" id="w3">
+    <div class="week-header" onclick="toggle('w3')">
+      <div class="week-num">WK 03</div>
+      <div>
+        <div class="week-title">Loading the Patterns</div>
+        <div class="week-phase-tag">Phase I · Foundation</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Increase dumbbell to 8 lbs. Introduce sprint starts. Roller blade sessions get more structured.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Sprint Mechanics + Skips</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> Full dynamic routine — 7 min</li>
+            <li><strong>A-Skips + B-Skips + Power Skips:</strong> 4 × 22 yds each</li>
+            <li><strong>Sprint Starts (from stance):</strong> 6 × 11 yds — explosive first step</li>
+            <li><strong>Acceleration Runs:</strong> 4 × 33 yds — build from 50% to 90%</li>
+            <li><strong>Deceleration Drill (cone stop):</strong> 4 × — sprint 16 yds, controlled stop</li>
+            <li><strong>Single-Leg Lateral Hop:</strong> 3 × 5 each leg — hop sideways over a line, land stable, pause 1s</li>
+            <li><strong>Cool-down</strong></li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Ladder Complex + Strength</div>
+          <ul class="drills">
+            <li><strong>Ladder Full Circuit:</strong> 1-in/1-out → Icky → Lateral → Scissors × 3 rounds</li>
+            <li><strong>DB Goblet Squat (8 lb):</strong> 3 × 12</li>
+            <li><strong>DB Split Squat (8 lb):</strong> 3 × 8 each leg</li>
+            <li><strong>DB RDL (8 lb):</strong> 3 × 10</li>
+            <li><strong>Plank:</strong> 3 × 30s</li>
+            <li><strong>Side Plank:</strong> 3 × 20s each</li>
+            <li><strong>Dead Bug:</strong> 3 × 10 each side</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Blade Technique</div>
+          <ul class="drills">
+            <li><strong>Blades:</strong> 30 min</li>
+            <li>10 min easy warm-up cruise</li>
+            <li>Crossover drills around cones × 5 each way</li>
+            <li>Edge work — inside/outside alternating × 10 each</li>
+            <li>5 × 22-yd speed strides (75%)</li>
+            <li>10 min cool-down cruise + stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Posterior Chain</div>
+          <ul class="drills">
+            <li><strong>Hip Flexor Activation Circuit:</strong> March × 15, Supine drive × 12, Standing resist × 10 — 3 rounds</li>
+            <li><strong>Kneeling Lunge Stretch:</strong> 3 × 60s each side with overhead reach</li>
+            <li><strong>Nordic Hamstring Curl (partner or anchor):</strong> 3 × 5 (slow eccentrics)</li>
+            <li><strong>DB Deadlift (8 lb):</strong> 3 × 10 — hip hinge focus</li>
+            <li><strong>Push-ups:</strong> 4 × 10</li>
+            <li><strong>DB Shoulder Press (5 lb):</strong> 3 × 10</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Hockey Agility + Endurance</div>
+          <ul class="drills">
+            <li><strong>5-10-5:</strong> 6 × max effort</li>
+            <li><strong>T-Drill:</strong> 6 × timed</li>
+            <li><strong>Figure-8 Cone Drill:</strong> 5 × each way</li>
+            <li><strong>Lateral Shuffle (11 yds):</strong> 6 × — no crossovers, stay low</li>
+            <li><strong>Bike — Interval:</strong> 20 min | 2 min easy / 1 min push × 6, 2 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills">
+            <li>Prioritize sleep and food</li>
+            <li>Casual activity OK — no structured training</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-block" id="w4">
+    <div class="week-header" onclick="toggle('w4')">
+      <div class="week-num">WK 04</div>
+      <div>
+        <div class="week-title">Phase I Deload & Assessment</div>
+        <div class="week-phase-tag">Phase I · Foundation</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Reduce volume by 30%. Assess movement quality. Prepare the body for Phase II intensity.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Skip & Sprint Review</div>
+          <ul class="drills">
+            <li>A-Skips, B-Skips, C-Skips: 3 × 22 yds each (quality over quantity)</li>
+            <li>Sprint 33 yds × 4 — relaxed, smooth form check</li>
+            <li>Carioca: 3 × 22 yds</li>
+            <li>Light 5 min cool-down jog + full stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Light Ladder + Core</div>
+          <ul class="drills">
+            <li>Ladder: 2 rounds of favorite patterns</li>
+            <li>Core circuit: Plank × 30s, Side plank × 25s each, Dead bug × 10 each — 2 rounds</li>
+            <li>DB Goblet Squat (5 lb): 2 × 10</li>
+            <li>Stretch: full 10 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wed — Easy Blade Cruise</div>
+          <ul class="drills">
+            <li>25 min relaxed roller blade</li>
+            <li>Work on form: long stride, arm swing, crossover</li>
+            <li>No sprints this day</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Full Hip Flexor Session</div>
+          <ul class="drills">
+            <li>This day is 100% hip flexor and mobility focus</li>
+            <li>Kneeling hip flexor stretch: 3 × 90s each</li>
+            <li>Supine leg lowering: 3 × 10</li>
+            <li>Hip circles: 3 × 15 each direction</li>
+            <li>90/90 hip stretch: 3 × 60s each side</li>
+            <li>Lateral leg swings: 3 × 15 each</li>
+            <li>Frog stretch: 3 × 45s</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Assessment Day</div>
+          <ul class="drills">
+            <li>Time yourself: T-Drill × 3 (record best)</li>
+            <li>Time yourself: 5-10-5 × 3 (record best)</li>
+            <li>Count max push-ups in one set (record)</li>
+            <li>Plank max hold (record)</li>
+            <li><strong>Single-Leg Broad Jump (each leg):</strong> 3 × — measure distance, record per leg</li>
+            <li>Easy 15 min bike cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Full Rest</div>
+          <ul class="drills">
+            <li>Full recovery before Phase II</li>
+            <li>Write down your Week 4 assessment scores!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE II ═══ -->
+
+  <!-- WEEK 5 -->
+  <div class="week-block" id="w5">
+    <div class="week-header" onclick="toggle('w5')">
+      <div class="week-num">WK 05</div>
+      <div>
+        <div class="week-title">Speed Development Begins</div>
+        <div class="week-phase-tag">Phase II · Speed & Power</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Phase II starts. Introduce explosive elements. Bump up dumbbell loads slightly. Roller blade sessions become agility-focused.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Explosive Sprint Work</div>
+          <ul class="drills">
+            <li><strong>Warm-up:</strong> A-Skips → B-Skips → Power Skips → Carioca</li>
+            <li><strong>Falling Starts:</strong> 6 × 11 yds — lean forward till you "fall," drive first step</li>
+            <li><strong>3-Point Stance Starts:</strong> 6 × 22 yds</li>
+            <li><strong>Flying 20s:</strong> 4 × (11 yds build-up, 22 yds full speed)</li>
+            <li><strong>Two-Foot Broad Jump:</strong> 4 × 3 in a row — max distance, land soft</li>
+            <li><strong>Single-Leg Broad Jump:</strong> 3 × 3 each leg — take off and land on same foot, pause before next rep</li>
+            <li><strong>Cool-down:</strong> Hip flexor + hamstring stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Ladder Speed + Strength</div>
+          <ul class="drills">
+            <li><strong>Ladder — Max Speed Circuit:</strong> All patterns × 4 rounds, as fast as possible</li>
+            <li><strong>DB Goblet Squat (10 lb):</strong> 4 × 10</li>
+            <li><strong>DB Split Squat (8 lb each hand):</strong> 3 × 10 each</li>
+            <li><strong>DB Bench Press (8 lb):</strong> 3 × 10</li>
+            <li><strong>DB Row (8 lb):</strong> 3 × 10 each arm</li>
+            <li><strong>Plank:</strong> 3 × 35s | Side Plank: 3 × 25s each</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Blade Agility</div>
+          <ul class="drills">
+            <li><strong>Blades:</strong> 35 min total</li>
+            <li>10 min warm-up cruise</li>
+            <li>Set up 5 cones in a line (about 3 ft apart)</li>
+            <li>Weave through cones × 8 (crossover turns)</li>
+            <li>Sprint 33 yds → stop → change direction × 8</li>
+            <li>Backward skating 22 yds × 5</li>
+            <li>10 min cool-down + stretch</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Lateral Power</div>
+          <ul class="drills">
+            <li><strong>Hip Flexor Activation Circuit:</strong> 3 rounds × 15 each movement</li>
+            <li><strong>Lateral Bound:</strong> 4 × 6 each side — land stable, pause 1s</li>
+            <li><strong>Single-Leg Lateral Hop — 3-in-a-row:</strong> 3 × 3 hops each leg over a line — stick each landing before next hop</li>
+            <li><strong>Lateral Shuffle Sprint:</strong> 6 × 11 yds each way</li>
+            <li><strong>DB Lateral Lunge (8 lb):</strong> 3 × 10 each</li>
+            <li><strong>Nordic Curls:</strong> 3 × 6 (slow eccentrics)</li>
+            <li><strong>Cool-down:</strong> 90/90 hip stretch + pigeon</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Complex Agility + Endurance</div>
+          <ul class="drills">
+            <li><strong>T-Drill:</strong> 6 × timed</li>
+            <li><strong>5-10-5:</strong> 6 × timed</li>
+            <li><strong>Star Drill (6 cones in star):</strong> 4 × each foot leading</li>
+            <li><strong>Reactive Drill:</strong> partner points L/R → sprint that way × 10</li>
+            <li><strong>Bike Intervals:</strong> 25 min | 90s easy / 45s hard × 8, cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills">
+            <li>Recovery priority: legs will be tired</li>
+            <li>Light stretch Saturday if sore</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-block" id="w6">
+    <div class="week-header" onclick="toggle('w6')">
+      <div class="week-num">WK 06</div>
+      <div>
+        <div class="week-title">Power & Edge Work</div>
+        <div class="week-phase-tag">Phase II · Speed & Power</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Add single-leg power work. Introduce barbell (empty or light bar). Blade sessions now include structured agility with timed sets.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Skip Complex + Speed</div>
+          <ul class="drills">
+            <li>A-Skips → B-Skips → Power Skips → C-Skips: 4 × each, 22 yds</li>
+            <li><strong>Wall Drill (march in place against wall):</strong> 3 × 10s fast</li>
+            <li><strong>Sprint 44 yds:</strong> 5 × from different starting positions (standing, kneeling, lying)</li>
+            <li><strong>Single-Leg Broad Jump:</strong> 4 × 4 each leg — increasing distance focus, stick every landing</li>
+            <li><strong>Single-Leg Vertical Jump (intro):</strong> 3 × 4 each leg — drive up off one foot, land on same foot, hold 1s</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Ladder + Bar Work</div>
+          <ul class="drills">
+            <li>Ladder full complex: 5 rounds max speed</li>
+            <li><strong>Barbell Back Squat (bar only ~15 lb):</strong> 4 × 10 — perfect form is the entire goal</li>
+            <li><strong>Barbell Romanian Deadlift (bar only):</strong> 3 × 10</li>
+            <li><strong>DB Bench Press (8 lb):</strong> 4 × 10</li>
+            <li><strong>Plank complex:</strong> Forward → Left → Right → Forward = 1 round × 3</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Blade Agility + Crossovers</div>
+          <ul class="drills">
+            <li>35 min blade session</li>
+            <li>Crossover cone weave: 10 × each direction</li>
+            <li>Quick feet around cone (tight circle): 10 × each leg</li>
+            <li>Sprint the straightaways, crossover the turns (oval pattern): 8 laps</li>
+            <li>Backward blade: 4 × 33 yds</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Stability</div>
+          <ul class="drills">
+            <li>Full hip flexor activation series: 3 rounds</li>
+            <li><strong>Single-Leg RDL (8 lb DB):</strong> 3 × 10 each — balance focus</li>
+            <li><strong>Single-Leg Wall Sit:</strong> 3 × 15s each</li>
+            <li><strong>Single-Leg Vertical Jump:</strong> 3 × 5 each leg — drive up, land same foot, stick 1s before reset</li>
+            <li><strong>Copenhagen Plank (inner thigh):</strong> 3 × 15s each side</li>
+            <li>Hip flexor stretch series: 5 min total</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Hockey Pattern Drills + Endurance</div>
+          <ul class="drills">
+            <li><strong>"Figure-8 + Sprint" Combo:</strong> 6 × (figure 8 around 2 cones, explode out for 22-yd sprint)</li>
+            <li><strong>4-Corner Cone Drill:</strong> 6 × — shuffle → sprint → backpedal → shuffle</li>
+            <li><strong>Suicide Runs:</strong> 4 × 5-10-15-20 yds</li>
+            <li><strong>Bike — Pyramid:</strong> 1-2-3-2-1 min hard with 1 min rest between</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills"><li>Rest fully. Grow stronger.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 7 -->
+  <div class="week-block" id="w7">
+    <div class="week-header" onclick="toggle('w7')">
+      <div class="week-num">WK 07</div>
+      <div>
+        <div class="week-title">First Step Quickness & Volume Peak</div>
+        <div class="week-phase-tag">Phase II · Speed & Power</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Highest volume week in Phase II. First-step focus. All DB weights can go to 10 lb where form allows.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — First Step + Acceleration</div>
+          <ul class="drills">
+            <li>Full skip warm-up: A → B → Power → C → Carioca</li>
+            <li><strong>Reaction Start (visual cue):</strong> 8 × 11 yds — react and drive</li>
+            <li><strong>Crossover Start (lateral step then sprint):</strong> 6 × 22 yds each side</li>
+            <li><strong>Drop-Step Sprint (hockey pivot):</strong> 6 × 22 yds each direction</li>
+            <li><strong>Single-Leg Broad Jump — Distance Challenge:</strong> 3 × 4 each leg — try to beat your Week 6 best</li>
+            <li>Full stretch cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Full Strength Session</div>
+          <ul class="drills">
+            <li><strong>Barbell Squat (bar + 5 lb each side = 25 lb):</strong> 4 × 8 — if form is perfect</li>
+            <li><strong>DB RDL (10 lb):</strong> 4 × 10</li>
+            <li><strong>DB Bench Press (10 lb):</strong> 4 × 10</li>
+            <li><strong>DB Row (10 lb):</strong> 4 × 10 each</li>
+            <li><strong>DB Shoulder Press (8 lb):</strong> 3 × 10</li>
+            <li><strong>Core Circuit:</strong> Plank 40s + Side Plank 30s + Dead Bug 12 each × 3</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Extended Blade Session</div>
+          <ul class="drills">
+            <li>40 min total</li>
+            <li>Warm-up cruise 10 min</li>
+            <li>Timed cone weave: 3 × record time</li>
+            <li>Sprint straightaways (8 × 44 yds)</li>
+            <li>Backward skate + turn transitions × 6 each</li>
+            <li>Cool-down 10 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Plyos</div>
+          <ul class="drills">
+            <li>Hip activation circuit: 3 rounds</li>
+            <li><strong>Two-Foot Box Jump (onto stable surface ~12"):</strong> 3 × 5 — land soft, reset each rep</li>
+            <li><strong>Single-Leg Box Jump (6–8" step):</strong> 3 × 4 each leg — drive off one foot, land two feet on box, step down carefully</li>
+            <li><strong>Lateral Box Jump:</strong> 3 × 4 each side</li>
+            <li><strong>Jump Squat (bodyweight):</strong> 3 × 8</li>
+            <li>Hip flexor stretch series: 8 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Agility Gauntlet + Long Bike</div>
+          <ul class="drills">
+            <li>Run this in order with 45s rest between:</li>
+            <li>T-Drill × 4 | 5-10-5 × 4 | Star Drill × 4 | Figure-8 Sprint × 4</li>
+            <li><strong>Bike Endurance:</strong> 30 min at moderate effort (Zone 2)</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills"><li>Full rest. Week 8 is a deload before Phase III.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 8 -->
+  <div class="week-block" id="w8">
+    <div class="week-header" onclick="toggle('w8')">
+      <div class="week-num">WK 08</div>
+      <div>
+        <div class="week-title">Phase II Deload & Re-Assessment</div>
+        <div class="week-phase-tag">Phase II · Speed & Power</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Reduce volume 30–35%. Reassess T-Drill, 5-10-5, push-ups, and plank. Compare to Week 4 scores.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Light Speed Review</div>
+          <ul class="drills">
+            <li>Skip complex: 3 × each, easy effort</li>
+            <li>Sprints 33 yds × 4 at 80%</li>
+            <li>Falling starts × 4</li>
+            <li>Full stretch 10 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Light Strength</div>
+          <ul class="drills">
+            <li>Drop weights back to Phase I levels</li>
+            <li>Goblet Squat (5 lb) × 2 × 10, RDL × 2 × 10, Push-ups × 2 × 10, Row × 2 × 10</li>
+            <li>Core: 2 rounds of plank circuit</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Easy Blade</div>
+          <ul class="drills">
+            <li>25 min easy cruise</li>
+            <li>Focus purely on stride mechanics and crossovers</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Mobility Only</div>
+          <ul class="drills">
+            <li>20 min full hip flexibility circuit</li>
+            <li>Kneeling lunge, 90/90, frog, pigeon, leg swings</li>
+            <li>No strength work today</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Assessment Day 2</div>
+          <ul class="drills">
+            <li>T-Drill × 3 timed — compare to Week 4</li>
+            <li>5-10-5 × 3 timed — compare to Week 4</li>
+            <li>Max push-ups — compare to Week 4</li>
+            <li>Max plank hold — compare to Week 4</li>
+            <li><strong>Single-Leg Broad Jump (each leg):</strong> 3 × — measure distance, compare to Week 4</li>
+            <li>Easy 20 min bike cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Full Rest</div>
+          <ul class="drills"><li>Prepare for Phase III — the hardest phase.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE III ═══ -->
+
+  <!-- WEEK 9 -->
+  <div class="week-block" id="w9">
+    <div class="week-header" onclick="toggle('w9')">
+      <div class="week-num">WK 09</div>
+      <div>
+        <div class="week-title">Competition Speed Training</div>
+        <div class="week-phase-tag">Phase III · Peak Performance</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Phase III is game-speed focused. Everything is faster, more reactive, more sport-specific.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Game-Speed Acceleration</div>
+          <ul class="drills">
+            <li>Full skip complex warm-up</li>
+            <li><strong>Reactive Sprint (partner audio cue):</strong> 8 × 16 yds</li>
+            <li><strong>Hockey Stop Simulation (sprint → stop → sprint):</strong> 8 × 22 yds</li>
+            <li><strong>Acceleration-Deceleration-Acceleration:</strong> 6 × 11-5-11 yds</li>
+            <li><strong>Single-Leg Bound → Sprint:</strong> 3 bounds on one leg, plant, then explode into 22-yd sprint × 5 each leg</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Peak Strength Session</div>
+          <ul class="drills">
+            <li><strong>Barbell Back Squat (bar + 5 lb each = 25 lb):</strong> 4 × 8 — controlled descent, explosive up</li>
+            <li><strong>Barbell RDL:</strong> 4 × 8</li>
+            <li><strong>DB Bench (10 lb):</strong> 4 × 10</li>
+            <li><strong>DB Row (10 lb):</strong> 4 × 10 each</li>
+            <li><strong>DB Shoulder Press (8 lb):</strong> 4 × 10</li>
+            <li><strong>Nordic Curls:</strong> 3 × 8</li>
+            <li><strong>Core Complex:</strong> Plank 45s + Ab wheel × 8 + side plank 35s × 3</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Blade Speed Circuit</div>
+          <ul class="drills">
+            <li>45 min total</li>
+            <li>10 min warm-up</li>
+            <li>Timed cone weave × 5 (try to beat Week 6 time)</li>
+            <li>Sprint 44 yds × 10 with 45s rest</li>
+            <li>Full backward skate laps × 6</li>
+            <li>Transition drills (forward→backward→forward): 8 ×</li>
+            <li>10 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Explosive Lateral</div>
+          <ul class="drills">
+            <li>Hip activation series × 3 rounds</li>
+            <li><strong>Lateral Bound → Stick Landing:</strong> 4 × 6 each side</li>
+            <li><strong>Single-Leg Lateral Bound — 3-in-a-row:</strong> 3 × 3 consecutive bounds each leg — bound sideways, land same foot, immediately bound again</li>
+            <li><strong>Side Shuffle Sprint Combo:</strong> shuffle 5 yds → plant → sprint 16 yds × 8 each side</li>
+            <li><strong>Copenhagen Plank:</strong> 3 × 25s each</li>
+            <li><strong>Single-Leg RDL (10 lb):</strong> 3 × 10 each</li>
+            <li>Hip + groin stretch: 8 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Agility + Long Endurance</div>
+          <ul class="drills">
+            <li>Full agility gauntlet (T-Drill, 5-10-5, Star, Figure-8 Sprint): 5 × each</li>
+            <li><strong>Reactive multi-cone drill:</strong> random cone called by partner × 10</li>
+            <li><strong>Bike — Tempo:</strong> 35 min | 5 min warm-up, 25 min at moderate-hard effort, 5 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills"><li>Phase III demands more recovery. Sleep and food are training tools.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 10 -->
+  <div class="week-block" id="w10">
+    <div class="week-header" onclick="toggle('w10')">
+      <div class="week-num">WK 10</div>
+      <div>
+        <div class="week-title">Maximum Intensity Week</div>
+        <div class="week-phase-tag">Phase III · Peak Performance</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">The hardest week of the program. Push every session. Endurance sessions reach their longest.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Sprint Volume Max</div>
+          <ul class="drills">
+            <li>Skip complex: full warm-up</li>
+            <li><strong>11-yd Sprint × 10</strong> with full recovery</li>
+            <li><strong>22-yd Sprint × 8</strong></li>
+            <li><strong>44-yd Sprint × 5</strong></li>
+            <li><strong>Two-Foot Broad Jump Series:</strong> 4 × 4 jumps</li>
+            <li><strong>Single-Leg Broad Jump — Max Distance:</strong> 4 × 4 each leg — push for max reach, mark and measure your best</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Max Strength Session</div>
+          <ul class="drills">
+            <li><strong>Barbell Squat:</strong> 5 × 6 — can try adding 2.5 lb per side if Week 9 was perfect</li>
+            <li><strong>Barbell RDL:</strong> 4 × 8</li>
+            <li><strong>DB Bench (10 lb):</strong> 4 × 12</li>
+            <li><strong>DB Row (10 lb):</strong> 4 × 12 each</li>
+            <li><strong>Overhead Press (8 lb):</strong> 4 × 10</li>
+            <li><strong>Core Circuit Max:</strong> Plank 50s, side plank 40s, dead bug 15 each × 3</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Peak Blade Session</div>
+          <ul class="drills">
+            <li>50 min total — longest blade session of program</li>
+            <li>Warm-up 10 min</li>
+            <li>Cone weave timed × 6</li>
+            <li>Sprint 44 yds × 12</li>
+            <li>Backward skate × 8</li>
+            <li>Full transition drill × 10</li>
+            <li>Crossover oval × 10 laps</li>
+            <li>10 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Power + Hip Flexor</div>
+          <ul class="drills">
+            <li>Hip activation circuit × 4 rounds</li>
+            <li><strong>Depth Jump → Sprint:</strong> step off low platform (~8"), land two feet, immediately sprint 16 yds × 5</li>
+            <li><strong>Single-Leg Depth Landing:</strong> step off platform, land on ONE foot, hold still 2s × 4 each leg — builds single-leg impact absorption</li>
+            <li><strong>Single-Leg Lateral Bound to Sprint:</strong> 3 bounds each leg → explode into 22-yd sprint × 5 each side</li>
+            <li><strong>Copenhagen Plank:</strong> 3 × 30s each</li>
+            <li>Full hip flexor session: 10 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Agility Gauntlet + Max Bike</div>
+          <ul class="drills">
+            <li>Gauntlet × 6 rounds: T-Drill → 5-10-5 → Figure-8 Sprint → Star Drill (30s rest between)</li>
+            <li><strong>Bike — Intervals:</strong> 40 min | 1 min all-out / 2 min easy × 10, 10 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Full Rest</div>
+          <ul class="drills"><li>Body needs this. Don't skip rest. Adaptation happens during recovery.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 11 -->
+  <div class="week-block" id="w11">
+    <div class="week-header" onclick="toggle('w11')">
+      <div class="week-num">WK 11</div>
+      <div>
+        <div class="week-title">Sport-Specific Sharpening</div>
+        <div class="week-phase-tag">Phase III · Peak Performance</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Pull back volume slightly, keep intensity high. Every drill should feel like a hockey shift.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Hockey Pattern Sprints</div>
+          <ul class="drills">
+            <li>Skip warm-up</li>
+            <li><strong>Wing Pattern Sprint</strong> (simulate RW route — curl, cut, fly): 8 × full effort</li>
+            <li><strong>Rush Pattern</strong> (sprint neutral → offensive zone): 6 ×</li>
+            <li><strong>Backcheck Sprint</strong> (full ice backcheck simulation): 6 ×</li>
+            <li>5 min cool-down</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Strength Maintenance</div>
+          <ul class="drills">
+            <li>Hold Week 10 weights — same session, slightly fewer sets</li>
+            <li>Barbell Squat: 3 × 8 | RDL: 3 × 8 | Bench: 3 × 10 | Row: 3 × 10</li>
+            <li>Core circuit: 2 rounds max effort</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Blade + Stickhandling Focus</div>
+          <ul class="drills">
+            <li>40 min blade session</li>
+            <li>If you have a stick, work stickhandling while skating (puck handling + footwork)</li>
+            <li>All transition and edge drills from earlier weeks</li>
+            <li>Mix in some backwards skating and pivots throughout</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Hip Flexor + Stability</div>
+          <ul class="drills">
+            <li>Hip activation × 3 rounds</li>
+            <li><strong>Single-Leg Squat (pistol progression):</strong> 3 × 5 each — assisted by holding something if needed</li>
+            <li><strong>Single-Leg Vertical Jump — Height Focus:</strong> 3 × 5 each leg — touch a wall target, try to beat your personal best height each set</li>
+            <li><strong>Single-Leg RDL (10 lb):</strong> 3 × 10</li>
+            <li>Full hip + groin stretch series: 10 min</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Competition Simulation</div>
+          <ul class="drills">
+            <li>Simulate 3 "periods" with rest between:</li>
+            <li><strong>Period 1:</strong> Agility gauntlet × 4 rounds (2 min rest)</li>
+            <li><strong>Period 2:</strong> Sprint circuit × 4 rounds (2 min rest)</li>
+            <li><strong>Period 3:</strong> Bike intervals 20 min hard</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Rest</div>
+          <ul class="drills"><li>One week left. Rest up and be ready to finish strong.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 12 -->
+  <div class="week-block" id="w12">
+    <div class="week-header" onclick="toggle('w12')">
+      <div class="week-num">WK 12</div>
+      <div>
+        <div class="week-title">Final Assessment & Showcase</div>
+        <div class="week-phase-tag">Phase III · Peak Performance</div>
+      </div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="week-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Cut volume to 50%. Reassess everything. Celebrate what was built. Prep for the next phase of training or season start.</p>
+      <div class="day-grid">
+        <div class="day-card">
+          <div class="day-name">Monday — Light Sprint + Skip Showcase</div>
+          <ul class="drills">
+            <li>Full skip complex — show off perfect form</li>
+            <li>Sprint 33 yds × 4 at full speed — feel how different it is from Week 1</li>
+            <li>Two-Foot Broad Jump × 4 — measure distance</li>
+            <li><strong>Single-Leg Broad Jump (each leg):</strong> 3 × — measure best, save for Friday final comparison</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday — Light Strength</div>
+          <ul class="drills">
+            <li>Drop back to moderate weights</li>
+            <li>Goblet squat, RDL, bench, row: 2 × 10 each, light</li>
+            <li>Core circuit: 2 rounds</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name active-rec">Wednesday — Final Blade Session</div>
+          <ul class="drills">
+            <li>35 min — make it your best</li>
+            <li>Every skill practiced over 12 weeks: crossovers, transitions, backward, agility</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday — Mobility + Hip Showcase</div>
+          <ul class="drills">
+            <li>Full hip flexor, groin, hamstring, quad mobility circuit</li>
+            <li>Compare hip mobility to Week 1 feel</li>
+            <li>Light plyos: Two-foot box jump × 4, lateral bound × 4 each</li>
+            <li><strong>Single-Leg Vertical Jump:</strong> 3 × each leg — mark your wall height, this is your finish-line measurement</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday — Final Assessment Day</div>
+          <ul class="drills">
+            <li><strong>T-Drill × 3</strong> — record best — compare Week 4 and Week 8</li>
+            <li><strong>5-10-5 × 3</strong> — record best</li>
+            <li><strong>Max push-ups</strong> — compare all previous</li>
+            <li><strong>Max plank hold</strong> — compare all previous</li>
+            <li><strong>Two-Foot Broad Jump</strong> — measure vs Week 1</li>
+            <li><strong>Single-Leg Broad Jump (each leg):</strong> 3 × best — compare to Weeks 4 and 8</li>
+            <li><strong>Single-Leg Vertical Jump (each leg):</strong> mark wall height — compare to Week 11</li>
+            <li>Easy bike 15 min cool-down</li>
+            <li>🏒 CELEBRATE. 12 WEEKS DONE.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-name rest">Sat / Sun — Celebrate & Rest</div>
+          <ul class="drills">
+            <li>You put in the work. Enjoy the off days.</li>
+            <li>Write down your final numbers and keep them forever.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DRILL LIBRARY -->
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title"><small>Reference Guide</small>DRILL LIBRARY</div>
+  </div>
+
+  <div class="drill-grid">
+    <div class="drill-card">
+      <div class="drill-cat">Skip Mechanics</div>
+      <div class="drill-name">A-Skip</div>
+      <div class="drill-desc">March with exaggerated knee drive. Swing opposite arm forward. Drive the ball of foot straight down. This builds sprint mechanics and hip flexor activation.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Skip Mechanics</div>
+      <div class="drill-name">B-Skip</div>
+      <div class="drill-desc">Start with an A-skip, then extend the raised leg fully forward before driving the foot down and back. Trains the full sprint leg cycle — hamstring loading and pawing action.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Skip Mechanics</div>
+      <div class="drill-name">C-Skip (Lateral)</div>
+      <div class="drill-desc">A lateral version of the A-skip. Drive the inside knee up and across while moving sideways. Builds hip abductor and adductor strength critical for lateral hockey movement.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Skip Mechanics</div>
+      <div class="drill-name">Power Skip</div>
+      <div class="drill-desc">Maximum height single-leg bound. Drive the knee up, push off the ground explosively, get maximum air time. Builds single-leg power and coordination.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Agility</div>
+      <div class="drill-name">T-Drill</div>
+      <div class="drill-desc">Sprint 10 yards, shuffle left 5 yards, shuffle right 10 yards, shuffle back left 5 yards, backpedal to start. One of the best measures of multi-directional speed.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Agility</div>
+      <div class="drill-name">5-10-5 (Pro Agility)</div>
+      <div class="drill-desc">From center, sprint 5 yards right, touch line, sprint 10 yards left, touch line, sprint 5 yards back to center. Tests change of direction and deceleration.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Agility</div>
+      <div class="drill-name">Carioca</div>
+      <div class="drill-desc">Moving laterally with alternating crossover steps — right foot crosses in front, then behind, as you move sideways. Builds hip mobility, coordination, and lateral foot speed.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Hip Flexor</div>
+      <div class="drill-name">Kneeling Hip Flexor Stretch</div>
+      <div class="drill-desc">Drop to one knee, drive hips forward while keeping core braced. Add an overhead reach on the kneeling side for a full psoas stretch. Hold 60–90 seconds each side.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Hip Flexor</div>
+      <div class="drill-name">90/90 Hip Stretch</div>
+      <div class="drill-desc">Sit on floor with both knees at 90° — one in front, one to the side. Lean gently over the front leg. Works deep hip rotators and hip flexors simultaneously.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Hip Flexor</div>
+      <div class="drill-name">Supine Knee Drive</div>
+      <div class="drill-desc">Lying on back, alternate driving one knee toward chest while the other leg stays extended just above the floor. Activates hip flexors without lower back strain.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Strength</div>
+      <div class="drill-name">Goblet Squat</div>
+      <div class="drill-desc">Hold one dumbbell at chest height, feet shoulder-width. Sit into a full squat keeping elbows inside knees. Perfect introductory squat for young athletes — builds legs and core together.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Strength</div>
+      <div class="drill-name">Romanian Deadlift (RDL)</div>
+      <div class="drill-desc">Hold dumbbells in front of thighs, hinge at hips with soft knees until you feel a hamstring stretch, then drive hips forward to stand. Builds posterior chain — essential for skating power.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Strength</div>
+      <div class="drill-name">Nordic Hamstring Curl</div>
+      <div class="drill-desc">Kneel with feet anchored. Slowly lower your body toward the floor using only hamstring tension — use hands to catch yourself at the bottom. Exceptional injury prevention for skaters.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Ladder</div>
+      <div class="drill-name">Icky Shuffle</div>
+      <div class="drill-desc">Step into the ladder with left foot, then right foot, then step left foot outside to the left, move to next rung and repeat. One of the highest-coordination ladder patterns — crucial for hockey foot speed.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Single-Leg Jumps</div>
+      <div class="drill-name">Single-Leg Hop &amp; Stick</div>
+      <div class="drill-desc">Jump off one foot and land on the same foot. Freeze for 1–2 seconds before the next rep — don't rush. The "stick" (balance hold) is the most important part. This is the foundation for all single-leg jump work.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Single-Leg Jumps</div>
+      <div class="drill-name">Single-Leg Broad Jump</div>
+      <div class="drill-desc">Take off from one foot, drive the knee up and reach forward, land on the same foot with a soft bent knee. Hold the landing 1–2 seconds. Measures single-leg horizontal power — tracked at Weeks 4, 8, and 12 to show progress.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Single-Leg Jumps</div>
+      <div class="drill-name">Single-Leg Vertical Jump</div>
+      <div class="drill-desc">Drive off one foot straight up, swing the free knee upward for height, land back on the same foot with control. Touch a wall target to track height. Builds the same single-leg push-off used in a skating stride.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Single-Leg Jumps</div>
+      <div class="drill-name">Single-Leg Lateral Bound</div>
+      <div class="drill-desc">Push off one foot sideways, land on the opposite foot and hold. For consecutive reps, immediately bound back. Mimics the lateral push-off in a skating crossover — one of the most hockey-specific power movements in the program.</div>
+    </div>
+    <div class="drill-card">
+      <div class="drill-cat">Single-Leg Jumps</div>
+      <div class="drill-name">Single-Leg Depth Landing</div>
+      <div class="drill-desc">Step off a low platform (6–8") and land on ONE foot — soft knee, quiet landing, hold for 2 seconds. This is pure force absorption training. It teaches the ankle, knee, and hip to work together under impact — critical for injury prevention in skaters.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- NUTRITION NOTE -->
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title"><small>Fueling Performance</small>NUTRITION BASICS</div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">🍽 Fueling a Growing Hockey Player</div>
+    <ul>
+      <li><strong>Pre-training (60–90 min before):</strong> Carbs + small protein — oatmeal, toast with peanut butter, banana + yogurt</li>
+      <li><strong>Post-training (within 30 min):</strong> Protein + carbs — chocolate milk, turkey sandwich, eggs + toast, Greek yogurt + fruit</li>
+      <li><strong>Daily protein target:</strong> ~0.7g per pound of bodyweight (~52g/day). Chicken, eggs, dairy, beans, fish</li>
+      <li><strong>Hydration:</strong> 60–80 oz water daily minimum. Add more on training days. No energy drinks.</li>
+      <li><strong>Sleep:</strong> 9–10 hours every night. This is where growth hormone releases and muscles rebuild.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <div>12-WEEK ELITE YOUTH HOCKEY TRAINING PROGRAM &nbsp;·&nbsp; RIGHT WINGER DEVELOPMENT</div>
+  <div style="margin-top:8px;">Always train under adult supervision · Prioritize form over load · Rest is part of training</div>
+</footer>
+
+<script>
+  function toggle(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
+  }
+  // Open Week 1 by default
+  document.getElementById('w1').classList.add('open');
+</script>
+
+</body>
+</html>
